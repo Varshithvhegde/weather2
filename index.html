@@ -26,6 +26,7 @@ function getWeatherData(city) {
         success: function(data) {
             //get weather data
             var weatherData = data.weather[0].description;
+            weatherData = weatherData.toUpperCase();
             var weatherIcon = data.weather[0].icon;
             var weatherIconUrl = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
             var weatherTemp = data.main.temp;
@@ -67,7 +68,7 @@ function getWeatherData(city) {
             var weatherDateFormatted = weatherDateFormatted[0] + " " + weatherDateFormatted[1] + " " + weatherDateFormatted[2] + " " + weatherDateFormatted[3];
 
             //display weather data
-            $("#weather-data").html("<br><h3>Weather in " + weatherCity + ", " + weatherCountry + "</h3><br><img src='" + weatherIconUrl + "'><br><h4>" + weatherData + "</h4><br><h4>Temperature: " + weatherTempF + "°F / " + weatherTempC + "°C</h4><br><h4>Humidity: " + weatherHumidity + "%</h4><br><h4>Wind: " + weatherWindSpeed + " mph " + "</h4><br><h4>Sunrise: " + weatherSunrise + "</h4><br><h4>Sunset: " + weatherSunset + "</h4><br><h4>Timezone: " + timezoneString + "<br><br><br>" );
+            $("#weather-data").html("<br><h3>Weather in " + weatherCity + ", " + weatherCountry + "</h3><br><img src='" + weatherIconUrl + "'><br><h4 class='Dataclass'>" + "&nbsp&nbsp" + weatherData + "&nbsp&nbsp" + "</h4><br><h4>Temperature: " + weatherTempF + "°F / " + weatherTempC + "°C</h4><br><h4>Humidity: " + weatherHumidity + "%</h4><br><h4>Wind: " + weatherWindSpeed + " mph " + "</h4><br><h4>Sunrise: " + weatherSunrise + "</h4><br><h4>Sunset: " + weatherSunset + "</h4><br><h4>Timezone: " + timezoneString + "<br><br><br>" );
         }
         });
     }
@@ -103,6 +104,17 @@ function getWeatherData(city) {
             border-radius: 10px;
 
     }
+
+    .Dataclass{
+        font-size: 25px;
+        color: #fff;
+        background-color: #212529;
+        border-color: #212529;
+        border-radius: 10px;
+        /*Add box Shadow*/
+        box-shadow: 0 4px 8px 0 rgb(0, 234, 255), 0 6px 20px 0 rgb(239, 8, 204);
+
+    }
     /*Make Above Card responsive*/
     @media only screen and (max-width: 600px) {
         .card {
@@ -114,9 +126,38 @@ function getWeatherData(city) {
     body{
         background-color: aqua;
     }
+    h3{
+        animation: flicker 1.5s infinite alternate;  
+    }
+
+    @keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #0fa,
+      0 0 80px #0fa,
+      0 0 90px #0fa,
+      0 0 100px #0fa,
+      0 0 150px #0fa;
+  }
+  20%, 24%, 55% {       
+    text-shadow: none;
+  }
+}
+
+
+    h4{
+        font-size: 15px;
+    }
     h3,h4{
         text-align: center;
-        color: red;
+        
+        /*Add best font color and font style*/
+        font-family: 'Open Sans', sans-serif;
+        font-weight: bold;
+
     }
     img{
        /*Bring Image to center of div*/
