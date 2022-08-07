@@ -10,7 +10,7 @@
     <!-- <link rel="stylesheet" href="css/style.css"> -->
 </head>
 <body>
-    <div id="weather-data">
+    <div id="weather-data" class="card">
 
     </div>
 <script>
@@ -47,7 +47,7 @@ function getWeatherData(city) {
             var weatherDateFormatted = weatherDateFormatted[0] + " " + weatherDateFormatted[1] + " " + weatherDateFormatted[2] + " " + weatherDateFormatted[3];
 
             //display weather data
-            $("#weather-data").html("<h3>Weather in " + weatherCity + ", " + weatherCountry + "</h3><br><img src='" + weatherIconUrl + "'><br><h4>" + weatherData + "</h4><br><h4>Temperature: " + weatherTempF + "°F / " + weatherTempC + "°C</h4><br><h4>Humidity: " + weatherHumidity + "%</h4><br><h4>Wind: " + weatherWindSpeed + " mph " + "</h4><br><h4>Sunrise: " + weatherSunrise + "</h4><br><h4>Sunset: " + weatherSunset + "</h4><br><h4>Timezone: " + weatherTimezone + "</h4><br><h4>Date: " + weatherDateFormatted + "</h4>");
+            $("#weather-data").html("<br><h3>Weather in " + weatherCity + ", " + weatherCountry + "</h3><br><img src='" + weatherIconUrl + "'><br><h4>" + weatherData + "</h4><br><h4>Temperature: " + weatherTempF + "°F / " + weatherTempC + "°C</h4><br><h4>Humidity: " + weatherHumidity + "%</h4><br><h4>Wind: " + weatherWindSpeed + " mph " + "</h4><br><h4>Sunrise: " + weatherSunrise + "</h4><br><h4>Sunset: " + weatherSunset + "</h4><br><h4>Timezone: " + weatherTimezone + "</h4><br><h4>Date: " + weatherDateFormatted + "</h4>");
         }
         });
     }
@@ -55,6 +55,24 @@ function getWeatherData(city) {
     getWeatherData(city);
 </script>
 <style>
+   /*Card for displaying weather*/
+    .card {
+         width: 25rem;
+         margin: auto;
+         margin-top: 20px;
+         margin-bottom: 20px;
+         border-radius: 10px;
+         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 20px;
+            color: #fff;
+            background-color: #212529;
+            border-color: #212529;
+            border-radius: 10px;
+
+    }
+
     body{
         background-color: aqua;
     }
