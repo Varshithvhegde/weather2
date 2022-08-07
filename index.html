@@ -1,37 +1,50 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Weather Details</title>
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
-</head>
-<body>
-    <div id="weather-data" class="card">
-        
-    </div>
-    <!--Add my Contribution on github-->
-    <p>Made With ❤ By <a href="https://github.com/Varshithvhegde">Varshith V Hegde</a></p>
-    
-<script>
-//function to get weather data
-function getWeatherData(city) {
-    var url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&APPID=dbd3b02d8958d62185d02e944cd5f522";
 
-    //ajax call to get weather data
-    $.ajax({
-        url: url,
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+      type="text/javascript"
+    ></script>
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+  </head>
+  <body>
+    <div id="weather-data" class="card"></div>
+    <!--Add my Contribution on github-->
+    <p>
+      Made With ❤ By
+      <a href="https://github.com/Varshithvhegde">Varshith V Hegde</a>
+    </p>
+
+    <script>
+      //function to get weather data
+      function getWeatherData(city) {
+        var url =
+          "https://api.openweathermap.org/data/2.5/weather?q=" +
+          city +
+          "&APPID=dbd3b02d8958d62185d02e944cd5f522";
+
+        //ajax call to get weather data
+        $.ajax({
+          url: url,
+          type: "GET",
+          dataType: "json",
+          success: function (data) {
             //get weather data
             var weatherData = data.weather[0].description;
             weatherData = weatherData.toUpperCase();
             var weatherIcon = data.weather[0].icon;
-            var weatherIconUrl = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+            var weatherIconUrl =
+              "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
             var weatherTemp = data.main.temp;
             var weatherTempF = (weatherTemp * (9 / 5) - 459.67).toFixed(2);
             var weatherTempC = (weatherTemp - 273.15).toFixed(2);
@@ -48,67 +61,98 @@ function getWeatherData(city) {
             var timezoneHours = Math.floor(timezone);
             var timezoneMinutes = Math.round((timezone - timezoneHours) * 60);
             var timezoneString = timezoneHours + ":" + timezoneMinutes + " UTC";
-            
-            
+
             weatherSunrise = new Date(weatherSunrise * 1000);
             weatherSunset = new Date(weatherSunset * 1000);
             //get only sunset time there with Am and Pm
-            weatherSunset = weatherSunset.toLocaleTimeString('en-US', {
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: true
+            weatherSunset = weatherSunset.toLocaleTimeString("en-US", {
+              hour: "numeric",
+              minute: "numeric",
+              hour12: true,
             });
             //get only sunrise time there with Am and Pm
-            weatherSunrise = weatherSunrise.toLocaleTimeString('en-US', {
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: true
+            weatherSunrise = weatherSunrise.toLocaleTimeString("en-US", {
+              hour: "numeric",
+              minute: "numeric",
+              hour12: true,
             });
             var weatherDate = new Date(weatherTimezone * 1000);
             var weatherDateFormatted = weatherDate.toLocaleString();
 
             var weatherDateFormatted = weatherDateFormatted.split(" ");
-            var weatherDateFormatted = weatherDateFormatted[0] + " " + weatherDateFormatted[1] + " " + weatherDateFormatted[2] + " " + weatherDateFormatted[3];
+            var weatherDateFormatted =
+              weatherDateFormatted[0] +
+              " " +
+              weatherDateFormatted[1] +
+              " " +
+              weatherDateFormatted[2] +
+              " " +
+              weatherDateFormatted[3];
 
             //display weather data
-            $("#weather-data").html("<br><h3>Weather in " + weatherCity + ", " + weatherCountry + "</h3><br><img src='" + weatherIconUrl + "'><br><h4 class='Dataclass'>" + "&nbsp&nbsp" + weatherData + "&nbsp&nbsp" + "</h4><br><h4>Temperature: " + weatherTempF + "°F / " + weatherTempC + "°C</h4><br><h4>Humidity: " + weatherHumidity + "%</h4><br><h4>Wind: " + weatherWindSpeed + " mph " + "</h4><br><h4>Sunrise: " + weatherSunrise + "</h4><br><h4>Sunset: " + weatherSunset + "</h4><br><h4>Timezone: " + timezoneString + "<br><br><br>" );
-        }
+            $("#weather-data").html(
+              "<br><h3>Weather in " +
+                weatherCity +
+                ", " +
+                weatherCountry +
+                "</h3><br><img src='" +
+                weatherIconUrl +
+                "'><br><h4 class='Dataclass'>" +
+                "&nbsp&nbsp" +
+                weatherData +
+                "&nbsp&nbsp" +
+                "</h4><br><h4>Temperature: " +
+                weatherTempF +
+                "°F / " +
+                weatherTempC +
+                "°C</h4><br><h4>Humidity: " +
+                weatherHumidity +
+                "%</h4><br><h4>Wind: " +
+                weatherWindSpeed +
+                " mph " +
+                "</h4><br><h4>Sunrise: " +
+                weatherSunrise +
+                "</h4><br><h4>Sunset: " +
+                weatherSunset +
+                "</h4><br><h4>Timezone: " +
+                timezoneString +
+                "<br><br><br>"
+            );
+          },
         });
-    }
-    var city=prompt("Enter a city");
-    if(city!=null){
+      }
+      var city = prompt("Enter a city");
+      if (city != null) {
         getWeatherData(city);
-    }
-    else{
+      } else {
         alert("Please enter a city");
-        city=prompt("Enter a city");
-        if(city!=null){
-            getWeatherData(city);
+        city = prompt("Enter a city");
+        if (city != null) {
+          getWeatherData(city);
         }
+      }
+    </script>
+    <style>
+      /*Card for displaying weather*/
 
-    }
-</script>
-<style>
-   /*Card for displaying weather*/
+      .card {
+        width: 25rem;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        text-align: center;
+        font-family: "Open Sans", sans-serif;
+        font-size: 20px;
+        color: #fff;
+        background-color: #212529;
+        border-color: #212529;
+        border-radius: 10px;
+      }
 
-    .card {
-         width: 25rem;
-         margin: auto;
-         margin-top: 20px;
-         margin-bottom: 20px;
-         border-radius: 10px;
-         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            text-align: center;
-            font-family: 'Open Sans', sans-serif;
-            font-size: 20px;
-            color: #fff;
-            background-color: #212529;
-            border-color: #212529;
-            border-radius: 10px;
-
-    }
-
-    .Dataclass{
+      .Dataclass {
         font-size: 25px;
         color: #fff;
         background-color: #212529;
@@ -116,86 +160,80 @@ function getWeatherData(city) {
         border-radius: 10px;
         /*Add box Shadow*/
         box-shadow: 0 4px 8px 0 rgb(0, 234, 255), 0 6px 20px 0 rgb(239, 8, 204);
-
-    }
-    /*Make Above Card responsive*/
-    @media only screen and (max-width: 600px) {
+      }
+      /*Make Above Card responsive*/
+      @media only screen and (max-width: 600px) {
         .card {
-            width: 95%;
-            height: 95%;
+          width: 95%;
+          height: 85%;
         }
-    }
- 
+      }
 
-    body{
-        
+      body {
         background-color: #e5df34;
-    }
-    h3{
-        animation: flicker 1.5s infinite alternate;  
-    }
+      }
+      h3 {
+        animation: flicker 1.5s infinite alternate;
+      }
 
-    @keyframes flicker {
-  0%, 18%, 22%, 25%, 53%, 57%, 100% {
-    text-shadow:
-      0 0 4px #fff,
-      0 0 11px #fff,
-      0 0 19px #fff,
-      0 0 40px #0fa,
-      0 0 80px #0fa,
-      0 0 90px #0fa,
-      0 0 100px #0fa,
-      0 0 150px #0fa;
-  }
-  20%, 24%, 55% {       
-    text-shadow: none;
-  }
-}
+      @keyframes flicker {
+        0%,
+        18%,
+        22%,
+        25%,
+        53%,
+        57%,
+        100% {
+          text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #0fa,
+            0 0 80px #0fa, 0 0 90px #0fa, 0 0 100px #0fa, 0 0 150px #0fa;
+        }
+        20%,
+        24%,
+        55% {
+          text-shadow: none;
+        }
+      }
 
-
-    h4{
+      h4 {
         font-size: 15px;
-        color:#e5df34;
-    }
-    h3,h4{
+        color: #e5df34;
+      }
+      h3,
+      h4 {
         text-align: center;
-       
-        /*Add best font color and font style*/
-        font-family: 'Open Sans', sans-serif;
-        font-weight: bold;
 
-    }
-    img{
-       /*Bring Image to center of div*/
+        /*Add best font color and font style*/
+        font-family: "Open Sans", sans-serif;
+        font-weight: bold;
+      }
+      img {
+        /*Bring Image to center of div*/
         display: block;
         margin-left: auto;
         margin-right: auto;
-
-    }
-    div{
+      }
+      div {
         align-items: center;
-    }
-    /*Align p tag to center*/
+      }
+      /*Align p tag to center*/
 
-    p{
+      p {
         text-align: center;
         font-size: 15px;
         font-weight: bold;
-    }
-    a,a:hover,a:visited,a:active{
+      }
+      a,
+      a:hover,
+      a:visited,
+      a:active {
         color: white;
         font-weight: bold;
         text-align: center;
         text-decoration: none;
-    
-    
-    }
-    a:hover{
+      }
+      a:hover {
         font-size: medium;
-    }
-
-</style>
-
-</body>
-
+      }
+    </style>
+  </body>
 </html>
