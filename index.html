@@ -56,6 +56,7 @@ function getWeatherData(city) {
 </script>
 <style>
    /*Card for displaying weather*/
+
     .card {
          width: 25rem;
          margin: auto;
@@ -72,6 +73,13 @@ function getWeatherData(city) {
             border-radius: 10px;
 
     }
+    /*Make Above Card responsive*/
+    @media only screen and (max-width: 600px) {
+        .card {
+            width: 100%;
+        }
+    }
+ 
 
     body{
         background-color: aqua;
