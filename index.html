@@ -52,7 +52,17 @@ function getWeatherData(city) {
         });
     }
     var city=prompt("Enter a city");
-    getWeatherData(city);
+    if(city!=null){
+        getWeatherData(city);
+    }
+    else{
+        alert("Please enter a city");
+        city=prompt("Enter a city");
+        if(city!=null){
+            getWeatherData(city);
+        }
+
+    }
 </script>
 <style>
    /*Card for displaying weather*/
