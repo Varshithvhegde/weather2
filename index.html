@@ -39,7 +39,20 @@ function getWeatherData(city) {
             var weatherSunrise = data.sys.sunrise;
             var weatherSunset = data.sys.sunset;
             var weatherTimezone = data.timezone;
-    
+            weatherSunrise = new Date(weatherSunrise * 1000);
+            weatherSunset = new Date(weatherSunset * 1000);
+            //get only sunset time there with Am and Pm
+            weatherSunset = weatherSunset.toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            });
+            //get only sunrise time there with Am and Pm
+            weatherSunrise = weatherSunrise.toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            });
             var weatherDate = new Date(weatherTimezone * 1000);
             var weatherDateFormatted = weatherDate.toLocaleString();
 
