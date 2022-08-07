@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Movie List</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+</head>
+<body>
+    <div id="weather-data">
+
+    </div>
+<script>
+//function to get weather data
+function getWeatherData(city) {
+    var url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&APPID=dbd3b02d8958d62185d02e944cd5f522";
+
+    //ajax call to get weather data
+    $.ajax({
+        url: url,
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            //get weather data
+            var weatherData = data.weather[0].description;
+            var weatherIcon = data.weather[0].icon;
+            var weatherIconUrl = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+            var weatherTemp = data.main.temp;
+            var weatherTempF = (weatherTemp * (9 / 5) - 459.67).toFixed(2);
+            var weatherTempC = (weatherTemp - 273.15).toFixed(2);
+            var weatherCity = data.name;
+            var weatherCountry = data.sys.country;
+            var weatherHumidity = data.main.humidity;
+            var weatherWindSpeed = data.wind.speed;
+            var weatherWindDeg = data.wind.deg;
+            var weatherSunrise = data.sys.sunrise;
+            var weatherSunset = data.sys.sunset;
+            var weatherTimezone = data.timezone;
+    
+            var weatherDate = new Date(weatherTimezone * 1000);
+            var weatherDateFormatted = weatherDate.toLocaleString();
+
+            var weatherDateFormatted = weatherDateFormatted.split(" ");
+            var weatherDateFormatted = weatherDateFormatted[0] + " " + weatherDateFormatted[1] + " " + weatherDateFormatted[2] + " " + weatherDateFormatted[3];
+
+            //display weather data
+            $("#weather-data").html("<h3>Weather in " + weatherCity + ", " + weatherCountry + "</h3><br><img src='" + weatherIconUrl + "'><br><h4>" + weatherData + "</h4><br><h4>Temperature: " + weatherTempF + "°F / " + weatherTempC + "°C</h4><br><h4>Humidity: " + weatherHumidity + "%</h4><br><h4>Wind: " + weatherWindSpeed + " mph " + "</h4><br><h4>Sunrise: " + weatherSunrise + "</h4><br><h4>Sunset: " + weatherSunset + "</h4><br><h4>Timezone: " + weatherTimezone + "</h4><br><h4>Date: " + weatherDateFormatted + "</h4>");
+        }
+        });
+    }
+    var city=prompt("Enter a city");
+    getWeatherData(city);
+</script>
+<style>
+    body{
+        background-color: aqua;
+    }
+    h3,h4{
+        text-align: center;
+        color: red;
+    }
+    img{
+       /*Bring Image to center of div*/
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+    div{
+        align-items: center;
+    }
+
+</style>
+
+</body>
+
+</html>
